@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free guide for international students - banking, housing, SIM cards, healthcare and buddy matching">
+    <title>StudentGuide - International Student Helper</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='[w3.org](http://www.w3.org/2000/svg)' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav-bar">
+    <div class="nav-content">
+        <div class="logo" onclick="showPage('home')">🎓 StudentGuide</div>
+        <div class="nav-links">
+            <a href="#" onclick="showPage('home')" class="nav-link active" data-page="home">Home</a>
+            <a href="#" onclick="showPage('checklist')" class="nav-link" data-page="checklist">Checklist</a>
+            <a href="#" onclick="showPage('buddy')" class="nav-link" data-page="buddy" style="background:rgba(255,107,107,0.3);">🤝 Find a Buddy</a>
+            <a href="#" onclick="showPage('banking')" class="nav-link" data-page="banking">Banking</a>
+            <a href="#" onclick="showPage('sim')" class="nav-link" data-page="sim">SIM</a>
+            <a href="#" onclick="showPage('housing')" class="nav-link" data-page="housing">Housing</a>
+            <a href="#" onclick="showPage('transport')" class="nav-link" data-page="transport">Transport</a>
+            <a href="#" onclick="showPage('healthcare')" class="nav-link" data-page="healthcare">Healthcare</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+    <div class="header-section">
+        <h1>Welcome to Your International Journey</h1>
+        <p>Select your destination to get personalized guidance</p>
+    </div>
+
+    <div class="emergency-banner" onclick="showPage('buddy')" style="cursor:pointer;">
+        <div>
+            <h3>🆘 Just Arrived and Feel Lost?</h3>
+            <p>Connect with a local student or volunteer who can help you right now</p>
+        </div>
+        <button class="emergency-btn">Get Help →</button>
+    </div>
+
+    <div class="country-selector">
+        <h2>🌍 Select Your Destination Country</h2>
+        <div class="country-grid">
+            <div class="country-card" onclick="selectCountry('Germany')">🇩🇪 Germany</div>
+            <div class="country-card" onclick="selectCountry('USA')">🇺🇸 USA</div>
+            <div class="country-card" onclick="selectCountry('UK')">🇬🇧 United Kingdom</div>
+            <div class="country-card" onclick="selectCountry('Canada')">🇨🇦 Canada</div>
+            <div class="country-card" onclick="selectCountry('Australia')">🇦🇺 Australia</div>
+        </div>
+        <p id="selectedCountryDisplay" style="margin-top:20px;font-size:18px;color:#4f6ef7;font-weight:bold;text-align:center;"></p>
+    </div>
+
+    <div class="location-box">
+        <div class="location-info">
+            <h3>📍 Your Current Location</h3>
+            <p id="locationText">Click the button to find your location</p>
+        </div>
+        <button class="get-location-btn" onclick="getLocation()">Find My Location</button>
+    </div>
+
+    <h2 style="margin-bottom:20px;">Essential Services</h2>
+    <div class="services-grid">
+        <div class="service-card" onclick="showPage('buddy')" style="border:3px solid #ff6b6b;">
+            <div class="service-icon" style="background:linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);">🤝</div>
+            <div class="service-content">
+                <h3>Find a Buddy</h3>
+                <p>Connect with locals or fellow students who can help you navigate your first days</p>
+            </div>
+        </div>
+        <div class="service-card" onclick="showPage('banking')">
+            <div class="service-icon">🏦</div>
+            <div class="service-content">
+                <h3>Banking</h3>
+                <p>Open student bank accounts with local providers</p>
+            </div>
+        </div>
+        <div class="service-card" onclick="showPage('sim')">
+            <div class="service-icon">📱</div>
+            <div class="service-content">
+                <h3>SIM Card</h3>
+                <p>Get local mobile plans and phone numbers</p>
+            </div>
+        </div>
+        <div class="service-card" onclick="showPage('housing')">
+            <div class="service-icon">🏠</div>
+            <div class="service-content">
+                <h3>Housing</h3>
+                <p>Find dorms, apartments, and shared housing</p>
+            </div>
+        </div>
+        <div class="service-card" onclick="showPage('transport')">
+            <div class="service-icon">🚌</div>
+            <div class="service-content">
+                <h3>Transport</h3>
+                <p>Public transit, student passes, and apps</p>
+            </div>
+        </div>
+        <div class="service-card" onclick="showPage('healthcare')">
+            <div class="service-icon">🏥</div>
+            <div class="service-content">
+                <h3>Healthcare</h3>
+                <p>Insurance providers and medical services</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BUDDY PAGE -->
+<div id="buddy" class="page">
+    <div class="buddy-hero">
+        <h2>🤝 You Don't Have to Do This Alone</h2>
+        <p>Connect with friendly locals or fellow international students who understand what you're going through</p>
+    </div>
+
+    <div id="buddySuccess" class="success-message">
+        <span style="font-size:24px;">✅</span>
+        <div>
+            <strong>Request Submitted!</strong>
+            <p>We'll connect you with a buddy soon. Check your email!</p>
+        </div>
+    </div>
+
+    <div class="emergency-banner">
+        <div>
+            <h3>🚨 Need Immediate Help?</h3>
+            <p>Arrived at the airport? Lost? Can't find your dorm? Get instant help from volunteers</p>
+        </div>
+        <button class="emergency-btn" onclick="scrollToForm()">Request Help Now</button>
+    </div>
+
+    <div class="help-categories">
+        <div class="help-category" onclick="showBuddyForm('arrival')">
+            <div class="icon">✈️</div>
+            <h4>Airport Pickup</h4>
+            <p>Someone to meet you when you land</p>
+        </div>
+        <div class="help-category" onclick="showBuddyForm('settle')">
+            <div class="icon">🏠</div>
+            <h4>Settling In</h4>
+            <p>Help with registration, bank, SIM</p>
+        </div>
+        <div class="help-category" onclick="showBuddyForm('explore')">
+            <div class="icon">🗺️</div>
+            <h4>City Tour</h4>
+            <p>Explore your new neighborhood</p>
+        </div>
+        <div class="help-category" onclick="showBuddyForm('language')">
+            <div class="icon">🗣️</div>
+            <h4>Language Help</h4>
+            <p>Translation and communication</p>
+        </div>
+    </div>
+
+    <h2 style="margin-bottom:20px;">I want to...</h2>
+    <div class="buddy-options">
+        <div class="buddy-option-card" onclick="selectBuddyType('find')" id="findBuddy">
+            <div class="icon">🙋</div>
+            <h3>Find a Buddy</h3>
+            <p>I'm new here and need someone to help me get settled, show me around, or just talk to</p>
+        </div>
+        <div class="buddy-option-card" onclick="selectBuddyType('become')" id="becomeBuddy">
+            <div class="icon">💪</div>
+            <h3>Become a Buddy</h3>
+            <p>I've been here a while and want to help new students feel welcome</p>
+        </div>
+    </div>
+
+    <div id="findBuddyForm" class="buddy-form-container">
+        <h3 style="margin-bottom:20px;color:#ff6b6b;">🙋 Request a Buddy</h3>
+        <form onsubmit="submitBuddyRequest(event, 'find')">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" required placeholder="How should we call you?">
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" required placeholder="your@email.com">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Country You're In *</label>
+                    <select required id="buddyCountry">
+                        <option value="">Select country</option>
+                        <option value="Germany">🇩🇪 Germany</option>
+                        <option value="USA">🇺🇸 USA</option>
+                        <option value="UK">🇬🇧 United Kingdom</option>
+                        <option value="Canada">🇨🇦 Canada</option>
+                        <option value="Australia">🇦🇺 Australia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>City/University *</label>
+                    <input type="text" required placeholder="e.g., Berlin, TU Munich">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>What do you need help with? *</label>
+                <select required id="helpType">
+                    <option value="">Select help type</option>
+                    <option value="airport">✈️ Airport pickup</option>
+                    <option value="registration">📝 Registration/Anmeldung</option>
+                    <option value="banking">🏦 Opening bank account</option>
+                    <option value="housing">🏠 Finding accommodation</option>
+                    <option value="shopping">🛒 First grocery shopping</option>
+                    <option value="orientation">🗺️ City orientation</option>
+                    <option value="language">🗣️ Language translation</option>
+                    <option value="emotional">💙 Just someone to talk to</option>
+                    <option value="other">🤔 Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Tell us about your situation</label>
+                <textarea placeholder="e.g., 'I just arrived in Berlin and I'm overwhelmed. I need help with Anmeldung and opening a bank account.'"></textarea>
+            </div>
+            <div class="form-group">
+                <label>When do you need help?</label>
+                <select>
+                    <option>As soon as possible</option>
+                    <option>Today</option>
+                    <option>This week</option>
+                    <option>Next week</option>
+                    <option>Flexible</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Find Me a Buddy 🤝</button>
+        </form>
+    </div>
+
+    <div id="becomeBuddyForm" class="buddy-form-container">
+        <h3 style="margin-bottom:20px;color:#ff6b6b;">💪 Become a Buddy</h3>
+        <form onsubmit="submitBuddyRequest(event, 'become')">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Country *</label>
+                    <select required>
+                        <option value="">Select country</option>
+                        <option value="Germany">🇩🇪 Germany</option>
+                        <option value="USA">🇺🇸 USA</option>
+                        <option value="UK">🇬🇧 United Kingdom</option>
+                        <option value="Canada">🇨🇦 Canada</option>
+                        <option value="Australia">🇦🇺 Australia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>City/University *</label>
+                    <input type="text" required placeholder="e.g., Berlin, TU Munich">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Languages you speak *</label>
+                <input type="text" required placeholder="e.g., English, German, Spanish">
+            </div>
+            <div class="form-group">
+                <label>Tell us about yourself</label>
+                <textarea placeholder="Why do you want to help? How long have you been here?"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Sign Up as Buddy 💪</button>
+        </form>
+    </div>
+
+    <h2 style="margin:30px 0 20px;">Available Buddies Near You</h2>
+    <div class="buddy-list" id="buddyList">
+        <div class="buddy-card">
+            <div class="buddy-header">
+                <div class="buddy-avatar">👩</div>
+                <div class="buddy-info">
+                    <h4>Sarah M.</h4>
+                    <div class="meta">📍 Berlin • 🎓 3rd year student</div>
+                </div>
+            </div>
+            <div class="buddy-tags">
+                <span class="buddy-tag help">Airport pickup</span>
+                <span class="buddy-tag help">Registration</span>
+                <span class="buddy-tag">English, German</span>
+            </div>
+            <p class="buddy-bio">"I remember how scary it was when I first arrived! Happy to help with Anmeldung, bank account, or just grab coffee."</p>
+            <button class="contact-btn" onclick="contactBuddy('Sarah')">Contact Sarah</button>
+        </div>
+
+        <div class="buddy-card">
+            <div class="buddy-header">
+                <div class="buddy-avatar">👨</div>
+                <div class="buddy-info">
+                    <h4>Ahmed K.</h4>
+                    <div class="meta">📍 Munich • 🎓 Master's student</div>
+                </div>
+            </div>
+            <div class="buddy-tags">
+                <span class="buddy-tag help">Banking</span>
+                <span class="buddy-tag help">Housing</span>
+                <span class="buddy-tag">English, Arabic, German</span>
+            </div>
+            <p class="buddy-bio">"I struggled with finding housing when I arrived. Now I know all the tricks!"</p>
+            <button class="contact-btn" onclick="contactBuddy('Ahmed')">Contact Ahmed</button>
+        </div>
+
+        <div class="buddy-card">
+            <div class="buddy-header">
+                <div class="buddy-avatar">👩</div>
+                <div class="buddy-info">
+                    <h4>Yuki T.</h4>
+                    <div class="meta">📍 Berlin • 🎓 PhD student</div>
+                </div>
+            </div>
+            <div class="buddy-tags">
+                <span class="buddy-tag help">Language</span>
+                <span class="buddy-tag help">City tours</span>
+                <span class="buddy-tag">English, Japanese, German</span>
+            </div>
+            <p class="buddy-bio">"Here for emotional support and language exchange! Let's explore museums together!"</p>
+            <button class="contact-btn" onclick="contactBuddy('Yuki')">Contact Yuki</button>
+        </div>
+    </div>
+</div>
+
+<!-- CHECKLIST PAGE -->
+<div id="checklist" class="page">
+    <div class="checklist-container">
+        <div class="progress-header">
+            <h2>✅ Arrival Checklist</h2>
+            <span id="progressText" style="font-size:20px;font-weight:bold;color:#4f6ef7;">0/6</span>
+        </div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+
+        <div class="checklist-item" onclick="toggleChecklist(this)">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Register with local authorities (Anmeldung)</div>
+            <span class="category-tag">Required</span>
+        </div>
+        <div class="checklist-item" onclick="toggleChecklist(this)">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Open a student bank account</div>
+            <span class="category-tag">Finance</span>
+        </div>
+        <div class="checklist-item" onclick="toggleChecklist(this)">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Get a local SIM card</div>
+            <span class="category-tag">Communication</span>
+        </div>
+        <div class="checklist-item" onclick="toggleChecklist(this)">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Enroll in health insurance</div>
+            <span class="category-tag">Health</span>
+        </div>
+        <div class="checklist-item" onclick="toggleChecklist(this)">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Get student transport pass</div>
+            <span class="category-tag">Transport</span>
+        </div>
+        <div class="checklist-item" onclick="toggleChecklist(this)">
+            <div class="checkbox"></div>
+            <div class="checklist-text">Attend university orientation</div>
+            <span class="category-tag">University</span>
+        </div>
+
+        <div style="background:linear-gradient(135deg,#ff6b6b 0%,#feca57 100%);color:white;padding:20px;border-radius:10px;margin-top:20px;text-align:center;">
+            <h4 style="margin-bottom:10px;">💡 Feeling Overwhelmed?</h4>
+            <p style="margin-bottom:15px;">You don't have to do this alone. A buddy can help!</p>
+            <button onclick="showPage('buddy')" style="background:white;color:#ff6b6b;border:none;padding:10px 20px;border-radius:20px;font-weight:600;cursor:pointer;">Find a Buddy</button>
+        </div>
+    </div>
+</div>
+
+<!-- BANKING PAGE -->
+<div id="banking" class="page">
+    <div class="detail-header">
+        <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+        <h2>🏦 Student Banking</h2>
+        <p id="bankingSubtitle">Select a country to see available banks</p>
+    </div>
+    <div class="content-grid" id="bankingContent"></div>
+</div>
+
+<!-- SIM PAGE -->
+<div id="sim" class="page">
+    <div class="detail-header">
+        <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+        <h2>📱 Mobile Plans & SIM Cards</h2>
+        <p id="simSubtitle">Select a country to see mobile providers</p>
+    </div>
+    <div class="content-grid" id="simContent"></div>
+</div>
+
+<!-- HOUSING PAGE -->
+<div id="housing" class="page">
+    <div class="detail-header">
+        <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+        <h2>🏠 Student Housing</h2>
+        <p id="housingSubtitle">Find your new home</p>
+    </div>
+    <div class="content-grid" id="housingContent"></div>
+</div>
+
+<!-- TRANSPORT PAGE -->
+<div id="transport" class="page">
+    <div class="detail-header">
+        <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+        <h2>🚌 Public Transport</h2>
+        <p id="transportSubtitle">Get around like a local</p>
+    </div>
+    <div class="content-grid" id="transportContent"></div>
+</div>
+
+<!-- HEALTHCARE PAGE -->
+<div id="healthcare" class="page">
+    <div class="detail-header">
+        <button class="back-btn" onclick="showPage('home')">← Back to Home</button>
+        <h2>🏥 Healthcare & Insurance</h2>
+        <p id="healthcareSubtitle">Stay healthy and insured</p>
+    </div>
+    <div class="content-grid" id="healthcareContent"></div>
+</div>
+
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
